@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">First App</string>
+    <string name="app_name">Budget</string>
     <string name="row1">First Row</string>
     <string name="row2">Second Row</string>
     <string name="large_text">
