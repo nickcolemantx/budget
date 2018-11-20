@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Account>
+	<number>7848</number>
+	<transactions>
+		<transaction>
+			<date>2018-11-19</date>
+			<description>wendy's</description>
+			<amount>12.10</amount>
+			<assigned>n</assigned>
+			<type>food</type>
+		</transaction>
+		<transaction>
+			<date>2018-11-19</date>
+			<description>Ulta</description>
+			<amount>35.00</amount>
+			<assigned>m</assigned>
+			<type>beauty</type>
+		</transaction>
+		<transaction>
+			<date>2018-11-19</date>
+			<description>Scotty P's</description>
+			<amount>21.38</amount>
+			<assigned>b</assigned>
+			<type>food</type>
+		</transaction>
+		<transaction>
+			<date>2018-11-19</date>
+			<description>pets mart</description>
+			<amount>106.00</amount>
+			<assigned>b</assigned>
+			<type>dogs</type>
+		</transaction>
+		<transaction>
+			<date>2018-11-19</date>
+			<description>Coppell water</description>
+			<amount>56.20</amount>
+			<assigned>b</assigned>
+			<type>utilities</type>
+		</transaction>
+	</transactions>
+</Account>

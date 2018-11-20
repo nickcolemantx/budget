@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Budget</string>
+    <string name="data_path">/download/</string>
     <string name="row1">First Row</string>
     <string name="row2">Second Row</string>
     <string name="large_text">

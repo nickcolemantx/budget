@@ -1,27 +1,84 @@
 package com.example.myfirstapp;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import java.util.List;
 
 public class TransactionsView extends AppCompatActivity {
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("NICK", "made it here1");
         setContentView(R.layout.activity_transactions_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Get the application context
+        mContext = getApplicationContext();
 
 
         CardView cardsTable = (CardView) findViewById(R.id.card_view);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        Log.i("NICK", "made it here2");
+
+        //TODO: figure out how to get path generally - fix where this path comes from.
+        Utils util = new Utils("/storage/emulated/0/Download/");
+
+        Log.i("NICK", "made it here3");
+
+
+        List<Account> accounts = util.retrieveCurrentMonthsTransactions();
+
+        Log.i("NICK", "made it here4");
+
+
+        int i = 2;
+        for(Account account: accounts){
+            Log.i("NICK1", account.getNum());
+            TextView textView = new TextView(mContext);
+            textView.setId(i);
+            textView.setTextColor(Color.BLACK);
+            textView.setText(account.getNum());
+
+            linearLayout.addView(textView, i);
+
+            ++i;
+
+            for(Transaction tran: account.getTransactions()){
+                TextView textView1 = new TextView(mContext);
+                textView1.setId(i);
+                textView1.setTextColor(Color.BLACK);
+                textView1.setText(tran.toString());
+
+                linearLayout.addView(textView1, i);
+            }
+            ++i;
+
+        }
+
+
+
+        //cardsTable.addView(relativeLayout);
+
+
+
+       // cardsTable.
+
+
+
+
+       // InputStreamReader reader = new InputStreamReader()
 
         //View viewRow = new View();
 
