@@ -1,7 +1,9 @@
 package com.example.myfirstapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -9,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.List;
@@ -27,6 +30,10 @@ public class TransactionsView extends AppCompatActivity {
         // Get the application context
         mContext = getApplicationContext();
 
+        Resources resources = mContext.getResources();
+        final int resourceId = resources.getIdentifier("rounded", "drawable",
+                mContext.getPackageName());
+        Drawable rounded = resources.getDrawable(resourceId);
 
         CardView cardsTable = (CardView) findViewById(R.id.card_view);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
@@ -43,14 +50,16 @@ public class TransactionsView extends AppCompatActivity {
         Log.i("NICK", "made it here4");
 
 
-        int i = 2;
+        int i = 0;
         for(Account account: accounts){
             Log.i("NICK1", account.getNum());
             TextView textView = new TextView(mContext);
             textView.setId(i);
             textView.setTextColor(Color.BLACK);
             textView.setText(account.getNum());
-
+            textView.setBackground(rounded);
+            textView.setPadding(5, 10, 5, 0);
+            textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             linearLayout.addView(textView, i);
 
             ++i;
@@ -60,7 +69,9 @@ public class TransactionsView extends AppCompatActivity {
                 textView1.setId(i);
                 textView1.setTextColor(Color.BLACK);
                 textView1.setText(tran.toString());
-
+                textView1.setBackground(rounded);
+                textView1.setPadding(5, 10, 5, 0);
+                textView1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 linearLayout.addView(textView1, i);
             }
             ++i;
