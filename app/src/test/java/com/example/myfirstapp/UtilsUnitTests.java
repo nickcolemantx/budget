@@ -9,19 +9,21 @@ import java.util.List;
 
 public class UtilsUnitTests {
 
+    private final String chasePathVirtual = "C:\\Users\\Nick's Big PC\\OneDrive\\budgetData\\";
+
     @Test
     public void canReadFile()
     {
 
         //URL url = getClass().getResource("app/sampledata/2018-11_transactions.xml");
         //TODO: create relative path to sampledata/2018-11_transactions.xml
-        Utils util = new Utils("F:\\AndriodApp\\app\\sampledata\\");//url.toString());
+        Utils util = new Utils(chasePathVirtual);//"F:\\AndriodApp\\app\\sampledata\\");//url.toString());
         List<Account> accounts = util.retrieveCurrentMonthsTransactions();
 
         for(Account acct : accounts){
 
             Assert.assertEquals(acct.getNum(), "7848");
-            Assert.assertEquals(acct.getTransactions().size(), 5);
+            Assert.assertEquals(acct.getTransactions().size(), 60);
             List<Transaction> trans = acct.getTransactions();
 
             Transaction tran1 = new Transaction("wendy's", "12.10", "n", "food", Calendar.getInstance());

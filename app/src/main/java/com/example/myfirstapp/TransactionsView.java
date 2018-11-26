@@ -19,6 +19,10 @@ import java.util.List;
 public class TransactionsView extends AppCompatActivity {
     private Context mContext;
 
+    private final String chasePathVirtual = "C:\\Users\\Nick's Big PC\\OneDrive\\budgetData\\";
+
+    private final String phonePath = "/storage/emulated/0/Download/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +41,11 @@ public class TransactionsView extends AppCompatActivity {
 
         CardView cardsTable = (CardView) findViewById(R.id.card_view);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+
         Log.i("NICK", "made it here2");
 
         //TODO: figure out how to get path generally - fix where this path comes from.
-        Utils util = new Utils("/storage/emulated/0/Download/");
+        Utils util = new Utils(phonePath);
 
         Log.i("NICK", "made it here3");
 
@@ -50,8 +55,11 @@ public class TransactionsView extends AppCompatActivity {
         Log.i("NICK", "made it here4");
 
 
+
+        //linearLayout.addView(cardsTable);
         int i = 0;
         for(Account account: accounts){
+            CardView card = new CardView(mContext);
             Log.i("NICK1", account.getNum());
             TextView textView = new TextView(mContext);
             textView.setId(i);
@@ -60,11 +68,13 @@ public class TransactionsView extends AppCompatActivity {
             textView.setBackground(rounded);
             textView.setPadding(5, 10, 5, 0);
             textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            linearLayout.addView(textView, i);
+            card.addView(textView);
+            linearLayout.addView(card, i);
 
             ++i;
 
             for(Transaction tran: account.getTransactions()){
+                CardView card1 = new CardView(mContext);
                 TextView textView1 = new TextView(mContext);
                 textView1.setId(i);
                 textView1.setTextColor(Color.BLACK);
@@ -72,8 +82,12 @@ public class TransactionsView extends AppCompatActivity {
                 textView1.setBackground(rounded);
                 textView1.setPadding(5, 10, 5, 0);
                 textView1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                linearLayout.addView(textView1, i);
+                card1.addView(textView1);
+                linearLayout.addView(card1, i);
             }
+
+
+
             ++i;
 
         }
