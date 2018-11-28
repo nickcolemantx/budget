@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.List;
@@ -20,6 +22,8 @@ public class TransactionsView extends AppCompatActivity {
     private Context mContext;
 
     private final String chasePathVirtual = "C:\\Users\\Nick's Big PC\\OneDrive\\budgetData\\";
+
+    private final String chasePathLaptop = "C:\\Users\\Darth Bane\\OneDrive\\budgetData\\";
 
     private final String phonePath = "/storage/emulated/0/Download/";
 
@@ -41,6 +45,7 @@ public class TransactionsView extends AppCompatActivity {
 
         CardView cardsTable = (CardView) findViewById(R.id.card_view);
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        linearLayout.setBackground(rounded);
 
         Log.i("NICK", "made it here2");
 
@@ -60,6 +65,7 @@ public class TransactionsView extends AppCompatActivity {
         int i = 0;
         for(Account account: accounts){
             CardView card = new CardView(mContext);
+            card.setBackground(rounded);
             Log.i("NICK1", account.getNum());
             TextView textView = new TextView(mContext);
             textView.setId(i);
@@ -67,7 +73,7 @@ public class TransactionsView extends AppCompatActivity {
             textView.setText(account.getNum());
             textView.setBackground(rounded);
             textView.setPadding(5, 10, 5, 0);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            textView.setLayoutParams(new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             card.addView(textView);
             linearLayout.addView(card, i);
 
@@ -75,10 +81,11 @@ public class TransactionsView extends AppCompatActivity {
 
             for(Transaction tran: account.getTransactions()){
                 CardView card1 = new CardView(mContext);
+                card1.setBackground(rounded);
                 TextView textView1 = new TextView(mContext);
                 textView1.setId(i);
                 textView1.setTextColor(Color.BLACK);
-                textView1.setText(tran.toString());
+                textView1.setText(tran.getDescription() + " : " + tran.getAmount());
                 textView1.setBackground(rounded);
                 textView1.setPadding(5, 10, 5, 0);
                 textView1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -136,6 +143,15 @@ public class TransactionsView extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            WebView webView = (WebView) findViewById(R.id.web);
+            // Enable Javascript
+            //WebSettings webSettings = webView.getSettings();
+            //webSettings.setJavaScriptEnabled(true);
+
+            webView.loadUrl("http://chase.com/");
+
+
+
             return true;
         }
         return super.onOptionsItemSelected(item);

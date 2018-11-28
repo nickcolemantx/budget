@@ -10,6 +10,7 @@ import java.util.List;
 public class UtilsUnitTests {
 
     private final String chasePathVirtual = "C:\\Users\\Nick's Big PC\\OneDrive\\budgetData\\";
+    private final String chasePathLaptop = "C:\\Users\\Darth Bane\\OneDrive\\budgetData\\";
 
     @Test
     public void canReadFile()
@@ -17,7 +18,7 @@ public class UtilsUnitTests {
 
         //URL url = getClass().getResource("app/sampledata/2018-11_transactions.xml");
         //TODO: create relative path to sampledata/2018-11_transactions.xml
-        Utils util = new Utils(chasePathVirtual);//"F:\\AndriodApp\\app\\sampledata\\");//url.toString());
+        Utils util = new Utils(chasePathLaptop);//"F:\\AndriodApp\\app\\sampledata\\");//url.toString());
         List<Account> accounts = util.retrieveCurrentMonthsTransactions();
 
         for(Account acct : accounts){
