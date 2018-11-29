@@ -43,6 +43,7 @@ public class Utils {
         try{
             documentBuilder = dbFactory.newDocumentBuilder();
             Document doc = documentBuilder.parse(inputTrans);
+            //documentBuilder.parse("");
             doc.getDocumentElement().normalize();
             NodeList nodeList = doc.getElementsByTagName("Account");
 
@@ -60,7 +61,7 @@ public class Utils {
 
         }
 
-        accounts.addAll(getChaseTransactionsFromHtmlFile());
+        accounts.addAll(getChaseTransactionsFromHtmlFile(""));
 
         return accounts;
     }
@@ -107,7 +108,7 @@ public class Utils {
 
     }
 
-    private List<Account> getChaseTransactionsFromHtmlFile(){
+    private List<Account> getChaseTransactionsFromHtmlFile(String html){
         String fileName = "example_chase.xml";
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("CST"));
         List<Account> accounts = new ArrayList<>();
@@ -119,7 +120,11 @@ public class Utils {
         //DocumentBuilder documentBuilder;
         try{
             //documentBuilder = dbFactory.newDocumentBuilder();
-            org.jsoup.nodes.Document doc = Jsoup.parse(inputTrans, null);
+            org.jsoup.nodes.Document doc;
+            if(html.isEmpty())
+                doc = Jsoup.parse(inputTrans, null);
+            else
+                doc = Jsoup.parse(html);
             //oc.getDocumentElement().normalize();
             //doc.getEl
             Elements chaseTrans = doc.getElementsByTag("tr");

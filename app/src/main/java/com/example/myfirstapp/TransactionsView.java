@@ -1,6 +1,7 @@
 package com.example.myfirstapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.List;
@@ -34,97 +36,6 @@ public class TransactionsView extends AppCompatActivity {
         setContentView(R.layout.activity_transactions_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // Get the application context
-        mContext = getApplicationContext();
-
-        Resources resources = mContext.getResources();
-        final int resourceId = resources.getIdentifier("rounded", "drawable",
-                mContext.getPackageName());
-        Drawable rounded = resources.getDrawable(resourceId);
-
-        CardView cardsTable = (CardView) findViewById(R.id.card_view);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
-        linearLayout.setBackground(rounded);
-
-        Log.i("NICK", "made it here2");
-
-        //TODO: figure out how to get path generally - fix where this path comes from.
-        Utils util = new Utils(phonePath);
-
-        Log.i("NICK", "made it here3");
-
-
-        List<Account> accounts = util.retrieveCurrentMonthsTransactions();
-
-        Log.i("NICK", "made it here4");
-
-
-
-        //linearLayout.addView(cardsTable);
-        int i = 0;
-        for(Account account: accounts){
-            CardView card = new CardView(mContext);
-            card.setBackground(rounded);
-            Log.i("NICK1", account.getNum());
-            TextView textView = new TextView(mContext);
-            textView.setId(i);
-            textView.setTextColor(Color.BLACK);
-            textView.setText(account.getNum());
-            textView.setBackground(rounded);
-            textView.setPadding(5, 10, 5, 0);
-            textView.setLayoutParams(new CardView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            card.addView(textView);
-            linearLayout.addView(card, i);
-
-            ++i;
-
-            for(Transaction tran: account.getTransactions()){
-                CardView card1 = new CardView(mContext);
-                card1.setBackground(rounded);
-                TextView textView1 = new TextView(mContext);
-                textView1.setId(i);
-                textView1.setTextColor(Color.BLACK);
-                textView1.setText(tran.getDescription() + " : " + tran.getAmount());
-                textView1.setBackground(rounded);
-                textView1.setPadding(5, 10, 5, 0);
-                textView1.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                card1.addView(textView1);
-                linearLayout.addView(card1, i);
-            }
-
-
-
-            ++i;
-
-        }
-
-
-
-        //cardsTable.addView(relativeLayout);
-
-
-
-       // cardsTable.
-
-
-
-
-       // InputStreamReader reader = new InputStreamReader()
-
-        //View viewRow = new View();
-
-        //cardsTable.addView();
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
     }
 
     @Override
@@ -136,24 +47,27 @@ public class TransactionsView extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        boolean isWebView = false;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        Log.i("NICKWEB", "menuSelect");
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            WebView webView = (WebView) findViewById(R.id.web);
-            // Enable Javascript
-            //WebSettings webSettings = webView.getSettings();
-            //webSettings.setJavaScriptEnabled(true);
-
-            webView.loadUrl("http://chase.com/");
-
-
-
+            Log.i("NICKWEB", "menuSelect1");
+            Log.i("NICKWEB", "menuSelect2");
+            Intent webIntent = new Intent(TransactionsView.this, BankWebView.class);
+            startActivity(webIntent);
+            Log.i("NICKWEB", "menuSelect3");
             return true;
         }
+
+        Log.i("NICKWEB", "menuSelect4");
         return super.onOptionsItemSelected(item);
+    }
+
+    public void populateScreen(String html){
+
     }
 }
